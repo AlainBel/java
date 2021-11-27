@@ -15,4 +15,10 @@ public class Point {
         return "Point{x=" + x + ", y=" + y + "}";
     }
 
+    public double distance(Point p2) {
+        double sqrtX = (p2.x - this.x) * (p2.x - this.x);
+        double sqrtY = (p2.y - this.y) * (p2.y - this.y);
+        return Math.sqrt(sqrtX + sqrtY);
+    }
+
 }
