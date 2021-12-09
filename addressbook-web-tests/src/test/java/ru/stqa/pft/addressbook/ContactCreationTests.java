@@ -24,17 +24,17 @@ public class ContactCreationTests {
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         js = (JavascriptExecutor) wd;
         wd.get("http://localhost/addressbook/group.php");
-        login();
+        login("admin", "secret");
     }
 
-    private void login() {
+    private void login(String username, String password) {
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys("admin");
+        wd.findElement(By.name("user")).sendKeys(username);
         wd.findElement(By.id("LoginForm")).click();
         wd.findElement(By.name("pass")).click();
         wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys("secret");
+        wd.findElement(By.name("pass")).sendKeys(password);
         wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
@@ -42,7 +42,7 @@ public class ContactCreationTests {
     @Test
     public void testContactCreation() throws Exception {
         gotoAddContactPage();
-        fillContactForm();
+        fillContactForm(new ContactData("Alena", "Belousova", "Sochi", "albelspb@gmail.com"));
         submitContactCreation();
         returnToHomePage();
     }
@@ -55,21 +55,21 @@ public class ContactCreationTests {
         wd.findElement(By.xpath("//input[21]")).click();
     }
 
-    private void fillContactForm() {
+    private void fillContactForm(ContactData contactData) {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys("Alena");
+        wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
         wd.findElement(By.name("lastname")).click();
         wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys("Belousova");
+        wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
         wd.findElement(By.name("theform")).click();
         wd.findElement(By.name("address")).click();
         wd.findElement(By.name("address")).clear();
-        wd.findElement(By.name("address")).sendKeys("Sochi");
+        wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
         wd.findElement(By.name("theform")).click();
         wd.findElement(By.name("email")).click();
         wd.findElement(By.name("email")).clear();
-        wd.findElement(By.name("email")).sendKeys("albelspb@gmail.com");
+        wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
         wd.findElement(By.name("theform")).click();
     }
 
