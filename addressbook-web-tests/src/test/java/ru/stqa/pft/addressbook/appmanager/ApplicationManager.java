@@ -10,9 +10,9 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
+    WebDriver wd;
 
-   WebDriver wd;
-
+    private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
 
     private static void login(WebDriver wd, String username, String password) {
@@ -32,11 +32,8 @@ public class ApplicationManager {
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/index.php");
         groupHelper = new GroupHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
         ApplicationManager.login(wd, "admin", "secret");
-    }
-
-    public void gotoGroupPage() {
-        wd.findElement(By.linkText("groups")).click();
     }
 
     public void stop() {
@@ -93,5 +90,9 @@ public class ApplicationManager {
 
     public GroupHelper getGroupHelper() {
         return groupHelper;
+    }
+
+    public NavigationHelper getNavigationHelper() {
+        return navigationHelper;
     }
 }
