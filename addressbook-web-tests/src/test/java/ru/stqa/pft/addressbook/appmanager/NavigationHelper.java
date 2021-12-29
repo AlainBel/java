@@ -13,4 +13,12 @@ public class NavigationHelper {
     public void gotoGroupPage() {
         wd.findElement(By.linkText("groups")).click();
     }
+
+    public void gotoAddContactPage() {
+        wd.findElement(By.linkText("add new")).click();
+    }
+
+    public void returnToHomePage() {
+        wd.findElement(By.linkText("home page")).click();
+    }
 }
